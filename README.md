@@ -17,23 +17,23 @@ Installation
 Pick one of these two commands:
 
 ```
-phonegap local plugin add https://github.com/benjie/phonegap-parse-plugin --variable APP_ID=PARSE_APP_ID --variable CLIENT_KEY=PARSE_CLIENT_KEY
-cordova plugin add https://github.com/benjie/phonegap-parse-plugin --variable APP_ID=PARSE_APP_ID --variable CLIENT_KEY=PARSE_CLIENT_KEY
+phonegap local plugin add https://github.com/emilyemorehouse/phonegap-parse-plugin --variable APP_ID=PARSE_APP_ID --variable CLIENT_KEY=PARSE_CLIENT_KEY
+cordova plugin add https://github.com/emilyemorehouse/phonegap-parse-plugin --variable APP_ID=PARSE_APP_ID --variable CLIENT_KEY=PARSE_CLIENT_KEY
 ```
 
 Initial Setup
 -------------
 
-Once the device is ready, call ```parsePlugin.initialize()```. This will register the device with Parse, you should see this reflected in your Parse control panel. After this runs you probably want to save the installationID somewhere, and perhaps subscribe the user to a few channels. Here is a contrived example.
+Once the device is ready, call ```Parse.initialize()```. This will register the device with Parse, you should see this reflected in your Parse control panel. After this runs you probably want to save the installationID somewhere, and perhaps subscribe the user to a few channels. Here is a contrived example.
 
 (Note: When using Windows Phone, clientKey must be your .NET client key from Parse. So you will need to set this based on platform i.e. if( window.device.platform == "Win32NT"))
 
 ```
-parsePlugin.initialize(appId, clientKey, function() {
+Parse.initialize(appId, clientKey, function() {
 
-	parsePlugin.subscribe('SampleChannel', function() {
+	Parse.subscribe('SampleChannel', function() {
 		
-		parsePlugin.getInstallationId(function(id) {
+		Parse.getInstallationId(function(id) {
 		
 			/**
 			 * Now you can construct an object and save it to your own services, or Parse, and corrilate users to parse installations
@@ -64,31 +64,31 @@ Usage
 -----
 ```
 <script type="text/javascript">
-	parsePlugin.initialize(appId, clientKey, function() {
+	Parse.initialize(appId, clientKey, function() {
 		alert('success');
 	}, function(e) {
 		alert('error');
 	});
   
-	parsePlugin.getInstallationId(function(id) {
+	Parse.getInstallationId(function(id) {
 		alert(id);
 	}, function(e) {
 		alert('error');
 	});
 	
-	parsePlugin.getSubscriptions(function(subscriptions) {
+	Parse.getSubscriptions(function(subscriptions) {
 		alert(subscriptions);
 	}, function(e) {
 		alert('error');
 	});
 	
-	parsePlugin.subscribe('SampleChannel', function() {
+	Parse.subscribe('SampleChannel', function() {
 		alert('OK');
 	}, function(e) {
 		alert('error');
 	});
 	
-	parsePlugin.unsubscribe('SampleChannel', function(msg) {
+	Parse.unsubscribe('SampleChannel', function(msg) {
 		alert('OK');
 	}, function(e) {
 		alert('error');
