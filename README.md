@@ -29,18 +29,18 @@ cordova plugin add https://github.com/emilyemorehouse/phonegap-parse-plugin --va
 Initial Setup
 -------------
 
-A parsePlugin variable is defined globally (e.g. $window.parsePlugin).
+A Parse variable is defined globally (e.g. $window.Parse).
 
-Once the device is ready (see: http://docs.phonegap.com/en/4.0.0/cordova_events_events.md.html#deviceready), call ```parsePlugin.initialize()```. This will register the device with Parse, you should see this reflected in your Parse control panel. After this runs you probably want to save the installationID somewhere, and perhaps subscribe the user to a few channels. Here is a contrived example.
+Once the device is ready (see: http://docs.phonegap.com/en/4.0.0/cordova_events_events.md.html#deviceready), call ```Parse.initialize()```. This will register the device with Parse, you should see this reflected in your Parse control panel. After this runs you probably want to save the installationID somewhere, and perhaps subscribe the user to a few channels. Here is a contrived example.
 
 (Note: When using Windows Phone, clientKey must be your .NET client key from Parse. So you will need to set this based on platform i.e. if( window.device.platform == "Win32NT"))
 
 ```
-parsePlugin.initialize(appId, clientKey, function() {
+Parse.initialize(appId, clientKey, function() {
 
-    parsePlugin.subscribe('SampleChannel', function() {
+    Parse.subscribe('SampleChannel', function() {
 
-        parsePlugin.getInstallationId(function(id) {
+        Parse.getInstallationId(function(id) {
 
             /**
              * Now you can construct an object and save it to your own services, or Parse, and correlate users to parse installations
@@ -70,9 +70,9 @@ Alternatively, we can store the user in the installation table and use queries t
 
 ```
 // on sign in, add the user pointer to the Installation
-parsePlugin.initialize(appId, clientKey, function() {
+Parse.initialize(appId, clientKey, function() {
 
-  parsePlugin.getInstallationObjectId( function(id) {
+  Parse.getInstallationObjectId( function(id) {
     // Success! You can now use Parse REST API to modify the Installation
     // see: https://parse.com/docs/rest/guide#objects for more info
     console.log("installation object id: " + id)
@@ -90,7 +90,7 @@ To receive notification callbacks, on device ready:
 
 
 ```
-parsePlugin.registerCallback('onNotification', function() {
+Parse.registerCallback('onNotification', function() {
 
   window.onNotification = function(pnObj) {
     alert('We received this push notification: ' + JSON.stringify(pnObj));
@@ -109,43 +109,43 @@ Usage
 -----
 ```
 <script type="text/javascript">
-    parsePlugin.initialize(appId, clientKey, function() {
+    Parse.initialize(appId, clientKey, function() {
         alert('success');
     }, function(e) {
         alert('error');
     });
 
-    parsePlugin.getInstallationId(function(id) {
+    Parse.getInstallationId(function(id) {
         alert(id);
     }, function(e) {
         alert('error');
     });
 
-    parsePlugin.getSubscriptions(function(subscriptions) {
+    Parse.getSubscriptions(function(subscriptions) {
         alert(subscriptions);
     }, function(e) {
         alert('error');
     });
 
-    parsePlugin.subscribe('SampleChannel', function() {
+    Parse.subscribe('SampleChannel', function() {
         alert('OK');
     }, function(e) {
         alert('error');
     });
 
-    parsePlugin.unsubscribe('SampleChannel', function(msg) {
+    Parse.unsubscribe('SampleChannel', function(msg) {
         alert('OK');
     }, function(e) {
         alert('error');
     });
 
-    parsePlugin.resetBadge(function() {
+    Parse.resetBadge(function() {
     alert('OK');
     }, function(e) {
         alert('error');
     });
 
-    parsePlugin.trackEvent(function(name, dimensions) {
+    Parse.trackEvent(function(name, dimensions) {
     	alert('OK');
   	}, function(e) {
     	alert('error');
