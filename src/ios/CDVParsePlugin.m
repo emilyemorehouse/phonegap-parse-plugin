@@ -24,6 +24,13 @@ static NSString * const PPReceivedInForeground = @"receivedInForeground";
 
 }
 
+- (void)getBadge:(CDVInvokedUrlCommand *)command {
+    NSLog(@"ParsePlugin.getBadge");
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)badge];
+    [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
+}
+
 - (void)trackEvent:(CDVInvokedUrlCommand *)command {
     CDVPluginResult* pluginResult = nil;
     NSString *eventName = [command.arguments objectAtIndex:0];

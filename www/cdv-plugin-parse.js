@@ -82,6 +82,17 @@ var parsePlugin = {
     },
 
     // iOS only
+    getBadge: function(successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            'ParsePlugin',
+            'getBadge',
+            []
+        );
+    },
+
+    // iOS only
     trackEvent: function(name, dimensions, successCallback, errorCallback) {
         cordova.exec(
             successCallback,
